@@ -1,13 +1,8 @@
 package problema2;
 
 
-import problema2.ContaCorrente;
 import java.util.Date;
 
-/**
- *
- * @author marcel
- */
 public class OperacaoTransferencia extends Operacao{
     private ContaCorrente contraPartida;
 

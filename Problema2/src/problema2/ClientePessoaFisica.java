@@ -1,11 +1,5 @@
 package problema2;
 
-
-
-/**
- *
- * @author marcel
- */
 public class ClientePessoaFisica extends Cliente{
     private String cpf;
 

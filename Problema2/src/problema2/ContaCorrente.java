@@ -5,14 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/*
- * Esta classe oferece as funcionalidades básicas para atender ao Problema 2.
- */
-
-/**
- *
- * @author marcel
- */
 public class ContaCorrente {
     private int numero;
     private int agencia;

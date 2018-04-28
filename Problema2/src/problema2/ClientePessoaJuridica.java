@@ -1,10 +1,5 @@
 package problema2;
 
-
-/**
- *
- * @author marcel
- */
 public class ClientePessoaJuridica extends Cliente{
     private String cnpj;
     private String servidorJMS;

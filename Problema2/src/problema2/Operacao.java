@@ -1,15 +1,9 @@
 package problema2;
 
 
-import problema2.ContaCorrente;
 import java.text.DateFormat;
 import java.util.Date;
 
-
-/**
- *
- * @author marcel
- */
 public class Operacao {
     private double valor;
     private double saldoAnterior;

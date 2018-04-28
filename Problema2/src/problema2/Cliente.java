@@ -1,16 +1,7 @@
 package problema2;
 
-/*
- * Esta classe oferece as funcionalidades básicas para atender ao Problema 2.
- */
-
 import java.util.HashMap;
 
-
-/**
- *
- * @author marcel
- */
 public abstract class Cliente {
     private String nome;
     private String telCelular;
