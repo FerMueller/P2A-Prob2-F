@@ -1,0 +1,7 @@
+No caso do padrão de projeto Observer temos dois tipos de sujeito, os OBSERVERs e o SUBJECT.
+
+No caso nosso Observer seria a classe abstrata Servico, pois ela implementa a interface Observer.
+
+No caso nossos ConcreteObserver seriam as classes Notificacao, BaixaInvestimento e AnaliseFluxoCaixa pois elas implementam as classes abstrata.
+
+Em nosso caso temos o Subject concreto a classe ContaCorrente na qual implementa a interface Observable
