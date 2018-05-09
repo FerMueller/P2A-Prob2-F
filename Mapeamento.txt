@@ -2,6 +2,6 @@ No caso do padrão de projeto Observer temos dois tipos de sujeito, os OBSERVERs 
 
 No caso nosso Observer seria a classe abstrata Servico, pois ela implementa a interface Observer.
 
-No caso nossos ConcreteObserver seriam as classes Notificacao, BaixaInvestimento e AnaliseFluxoCaixa pois elas implementam as classes abstrata.
+No caso nossos ConcreteObserver seriam as classes Notificacao, BaixaInvestimento e AnaliseFluxoCaixa pois elas implementam as classes abstrata. Eles no caso possuem o método update() no qual gera a mensagem que será enviada para o usuário.
 
-Em nosso caso temos o Subject concreto a classe ContaCorrente na qual implementa a interface Observable
+Em nosso caso temos o Subject concreto a classe ContaCorrente na qual implementa a interface Observable. Quando é realizada alguma operação os observers são notificados para que seja enviada uma mensagem para o cliente. Para realizar essa ação criamos o método startMovimentacao().
