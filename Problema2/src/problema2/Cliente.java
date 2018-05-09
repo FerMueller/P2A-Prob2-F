@@ -8,6 +8,11 @@ public abstract class Cliente {
     private String telFixo;
     private HashMap<String,ContaCorrente> contas;
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+
     public Cliente(String nome, String telCelular, String telFixo) {
         this.setNome(nome);
         this.setTelCelular(telCelular);

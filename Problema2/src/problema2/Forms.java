@@ -5,17 +5,23 @@
  */
 package problema2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jadiels
  */
 public class Forms extends javax.swing.JFrame {
 
+    ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
+    String operacaoExec;
+
     /**
      * Creates new form Forms
      */
     public Forms() {
         initComponents();
+
     }
 
     /**
@@ -28,6 +34,7 @@ public class Forms extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -56,18 +63,22 @@ public class Forms extends javax.swing.JFrame {
         cbCliente = new javax.swing.JComboBox();
         btFinalizarConta = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        cbNotificacao = new javax.swing.JCheckBox();
+        cbSMS = new javax.swing.JCheckBox();
         cbAnalise = new javax.swing.JCheckBox();
         cbBaixa = new javax.swing.JCheckBox();
+        cbWhats = new javax.swing.JCheckBox();
+        cbJms = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cbConta = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        flagSacar = new javax.swing.JRadioButton();
+        flagDepos = new javax.swing.JRadioButton();
+        flagTrans = new javax.swing.JRadioButton();
         cbDestino = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         btOperacao = new javax.swing.JButton();
+        txtValor = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,13 +122,12 @@ public class Forms extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addComponent(rdFisica)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(rdFisica))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -193,6 +203,16 @@ public class Forms extends javax.swing.JFrame {
 
         jLabel14.setText("Agencia:");
 
+        cbCliente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbClienteItemStateChanged(evt);
+            }
+        });
+        cbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cbClienteMousePressed(evt);
+            }
+        });
         cbCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbClienteActionPerformed(evt);
@@ -200,19 +220,32 @@ public class Forms extends javax.swing.JFrame {
         });
 
         btFinalizarConta.setText("Finalizar");
+        btFinalizarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFinalizarContaActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Serviços:");
 
-        cbNotificacao.setText("Notificação das operações realizadas");
+        cbSMS.setText("SMS");
 
         cbAnalise.setText("Análise do fluxo de caixa");
 
         cbBaixa.setText("Baixa automática de investimento");
 
+        cbWhats.setText("WHATS");
+
+        cbJms.setText("JMS");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(136, 136, 136)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -221,19 +254,18 @@ public class Forms extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbAnalise)
-                    .addComponent(btFinalizarConta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbCliente, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtAgencia, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbNotificacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbBaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(145, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btFinalizarConta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbCliente, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtNumero, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtAgencia, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(cbBaixa, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                        .addComponent(cbWhats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbSMS)
+                        .addComponent(cbJms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,29 +287,43 @@ public class Forms extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(cbNotificacao))
+                    .addComponent(cbSMS))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbWhats)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbJms)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
                 .addComponent(cbAnalise)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbBaixa)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btFinalizarConta)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGap(49, 49, 49))
         );
 
         jTabbedPane1.addTab("Abrir Conta", jPanel2);
 
         jLabel11.setText("Conta:");
 
-        jRadioButton1.setText("Sacar");
+        buttonGroup2.add(flagSacar);
+        flagSacar.setText("Sacar");
 
-        jRadioButton2.setText("Depositar");
+        buttonGroup2.add(flagDepos);
+        flagDepos.setText("Depositar");
 
-        jRadioButton3.setText("Transferencia");
+        buttonGroup2.add(flagTrans);
+        flagTrans.setText("Transferencia");
 
         jLabel12.setText("Conta Destino:");
 
         btOperacao.setText("Realizar Operação");
+        btOperacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btOperacaoActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Valor");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -285,26 +331,33 @@ public class Forms extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btOperacao)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(48, 48, 48)
-                        .addComponent(jRadioButton2)
-                        .addGap(39, 39, 39)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(flagSacar)
+                                .addGap(48, 48, 48)
+                                .addComponent(flagDepos)
+                                .addGap(39, 39, 39))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtValor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(81, Short.MAX_VALUE))
+                                .addContainerGap(348, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jRadioButton3)
+                                .addComponent(flagTrans)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(cbConta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,13 +372,15 @@ public class Forms extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(flagSacar)
+                    .addComponent(flagDepos)
+                    .addComponent(flagTrans))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addGap(27, 27, 27)
                 .addComponent(btOperacao)
                 .addContainerGap(164, Short.MAX_VALUE))
@@ -348,12 +403,102 @@ public class Forms extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+        if (rdFisica.isSelected()) {
+            ClientePessoaFisica cliente = new ClientePessoaFisica(txtNome.getText(),
+                    txtCelular.getText(), txtFixo.getText(), txtCpf.getText());
+            listClientes.add(cliente);
+            cbCliente.addItem(cliente);
+        } else {
+            ClientePessoaJuridica cliente = new ClientePessoaJuridica(txtNome.getText(),
+                    txtCelular.getText(), txtFixo.getText(), txtCnpj.getText(),
+                    txtJms.getText());
+            listClientes.add(cliente);
+            cbCliente.addItem(cliente);
+        }
 
+        txtNome.setText("");
+        txtFixo.setText("");
+        txtCelular.setText("");
+        txtCpf.setText("");
+        txtCnpj.setText("");
+        txtJms.setText("");
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void cbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbClienteActionPerformed
+
+    private void btFinalizarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizarContaActionPerformed
+
+        ContaCorrente conta = new ContaCorrente(Integer.parseInt(txtNumero.getText()), Integer.parseInt(txtAgencia.getText()));
+        Notificacao noti = new Notificacao("Notificacao");
+        if (cbSMS.isSelected()) {
+            noti.addTipoNotificacao(new TiposNotificacao(1, "SMS"));
+        }
+
+        if (cbWhats.isSelected()) {
+            noti.addTipoNotificacao(new TiposNotificacao(2, "WHATS"));
+        }
+        if (cbJms.isSelected()) {
+            noti.addTipoNotificacao(new TiposNotificacao(3, "JMS"));
+        }
+        conta.addObserver(noti);
+
+        if (cbAnalise.isSelected()) {
+            conta.addObserver(new AnaliseFluxoCaixa("Analise Fluxo Caixa"));
+        }
+        if (cbBaixa.isSelected()) {
+            conta.addObserver(new BaixaInvestimento("Baixa de Investimento"));
+        }
+
+        conta.setCliente((Cliente) cbCliente.getSelectedItem());
+
+        cbConta.addItem(conta);
+        cbDestino.addItem(conta);
+
+        txtNumero.setText("");
+        txtAgencia.setText("");
+
+        cbSMS.setSelected(false);
+        cbWhats.setSelected(false);
+        cbAnalise.setSelected(false);
+        cbBaixa.setSelected(false);
+        cbJms.setSelected(false);
+    }//GEN-LAST:event_btFinalizarContaActionPerformed
+
+    private void cbClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbClienteMousePressed
+
+    }//GEN-LAST:event_cbClienteMousePressed
+
+    private void btOperacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOperacaoActionPerformed
+        ContaCorrente conta = (ContaCorrente) cbConta.getSelectedItem();
+        ContaCorrente contaDestino = (ContaCorrente) cbDestino.getSelectedItem();
+        if (flagSacar.isSelected()) {
+            conta.setUltimaOperacao("Saque de " + txtValor.getText());
+            conta.sacar(Integer.parseInt(txtValor.getText()));
+        }
+        if (flagTrans.isSelected()) {
+            conta.setUltimaOperacao("Transferência de " + txtValor.getText());
+            contaDestino.setUltimaOperacao("Recebeu transferência de " + txtValor.getText());
+            conta.transferir(Integer.parseInt(txtValor.getText()), (ContaCorrente) cbDestino.getSelectedItem());
+
+        }
+        if (flagDepos.isSelected()) {
+            conta.setUltimaOperacao("Depósito de " + txtValor.getText());
+            conta.depositar(Integer.parseInt(txtValor.getText()));
+        }
+
+        txtValor.setText("");
+    }//GEN-LAST:event_btOperacaoActionPerformed
+
+    private void cbClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbClienteItemStateChanged
+
+        if (cbCliente.getSelectedItem() instanceof ClientePessoaFisica) {
+            cbJms.setVisible(false);
+        } else {
+            cbJms.setVisible(true);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cbClienteItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -395,18 +540,25 @@ public class Forms extends javax.swing.JFrame {
     private javax.swing.JButton btFinalizarConta;
     private javax.swing.JButton btOperacao;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JCheckBox cbAnalise;
     private javax.swing.JCheckBox cbBaixa;
     private javax.swing.JComboBox cbCliente;
     private javax.swing.JComboBox cbConta;
     private javax.swing.JComboBox cbDestino;
-    private javax.swing.JCheckBox cbNotificacao;
+    private javax.swing.JCheckBox cbJms;
+    private javax.swing.JCheckBox cbSMS;
+    private javax.swing.JCheckBox cbWhats;
+    private javax.swing.JRadioButton flagDepos;
+    private javax.swing.JRadioButton flagSacar;
+    private javax.swing.JRadioButton flagTrans;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -418,9 +570,6 @@ public class Forms extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton rdFisica;
     private javax.swing.JRadioButton rdJuridica;
@@ -432,5 +581,6 @@ public class Forms extends javax.swing.JFrame {
     private javax.swing.JTextField txtJms;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }
