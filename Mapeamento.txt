@@ -1,7 +1,12 @@
-No caso do padr�o de projeto Observer temos dois tipos de sujeito, os OBSERVERs e o SUBJECT.
+No caso do padrão de projeto Observer temos dois tipos de sujeito, os OBSERVERs e o SUBJECT.
 
 No caso nosso Observer seria a classe abstrata Servico, pois ela implementa a interface Observer.
 
-No caso nossos ConcreteObserver seriam as classes Notificacao, BaixaInvestimento e AnaliseFluxoCaixa pois elas implementam as classes abstrata. Eles no caso possuem o m�todo update() no qual gera a mensagem que ser� enviada para o usu�rio.
+No caso nossos ConcreteObserver seriam as classes Notificacao, BaixaInvestimento e AnaliseFluxoCaixa pois elas implementam as classes abstrata. Eles no caso possuem o método update() no qual gera a mensagem que será enviada para o usuário.
 
-Em nosso caso temos o Subject concreto a classe ContaCorrente na qual implementa a interface Observable. Quando � realizada alguma opera��o os observers s�o notificados para que seja enviada uma mensagem para o cliente. Para realizar essa a��o criamos o m�todo startMovimentacao().
+Em nosso caso temos o Subject concreto a classe ContaCorrente na qual implementa a interface Observable. Quando é realizada alguma operação os observers são notificados para que seja enviada uma mensagem para o cliente. Para realizar essa ação criamos o método startMovimentacao().
+
+--> Prof. Marcel: a classe TiposNotificacao não precisaria existir, pois as notificações pelos diferentes formatos poderiam ser subclasses de Notificacao (3 subclasses). Assim, cada notificação desejada pelo cliente seria um observador registrado na ContaCorrente. Ficaria mais simples.
+--> Prof. Marcel: para que List<Servico> em ContaCorrente? Se ela é subclasse de Observable, já possui uma lista de Observers (Servico é um tipo de Observer).
+--> Prof. Marcel: o método implementado de Observer pelas subclasses de Servico foi update(Observable o, Object arg). Porém o método usado na classe ContaCorrente para notificar os observadores foi notifyObservers() - sem parâmetro - o que vai gerar a chamada de update(Observable o)
+--> Prof. Marcel: não deveria ser o cliente (Forms.java) a setar a última operação - deveria ser a própria classe ContaCorrente em seus métodos que deveria fazer isto. Apesar do atributo ultimaOperacao em ContaCorrente ser desnecessário uma vez que já são guardadas todas as operações realizadas. Por isto que deveriam ter usado o notifyObservers passando como parâmetro a operação realizada.
