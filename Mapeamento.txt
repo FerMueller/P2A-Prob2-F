@@ -10,3 +10,9 @@ Em nosso caso temos o Subject concreto a classe ContaCorrente na qual implementa
 --> Prof. Marcel: para que List<Servico> em ContaCorrente? Se ela é subclasse de Observable, já possui uma lista de Observers (Servico é um tipo de Observer).
 --> Prof. Marcel: o método implementado de Observer pelas subclasses de Servico foi update(Observable o, Object arg). Porém o método usado na classe ContaCorrente para notificar os observadores foi notifyObservers() - sem parâmetro - o que vai gerar a chamada de update(Observable o)
 --> Prof. Marcel: não deveria ser o cliente (Forms.java) a setar a última operação - deveria ser a própria classe ContaCorrente em seus métodos que deveria fazer isto. Apesar do atributo ultimaOperacao em ContaCorrente ser desnecessário uma vez que já são guardadas todas as operações realizadas. Por isto que deveriam ter usado o notifyObservers passando como parâmetro a operação realizada.
+
+--> Prof. Marcel: Cada problema recebe uma nota de 0,0 a 3,0.
+A soma dos 3 problemas mais a avaliação sobre a colaboração no trabalho em equipe define a nota de cada aluno.
+Problema - Notas Equipe F
+1	    2,3
+2	    2,6
